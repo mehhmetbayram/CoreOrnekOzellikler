@@ -1,0 +1,135 @@
+﻿@model List<ProjeCoreOrnekOzellikler.Entities.cdItem>
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    .content-box {
+        width: 410px;
+        height: 235px;
+        margin: 0 auto;
+        position: relative; /* So we can position the banner within the box */
+        background: gray;
+        border: 5px solid white;
+        box-shadow: 0 0 10px rgba(0,0,0,.3);
+        -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
+        -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
+    }
+
+    #ribbon-container {
+        position: absolute;
+        top: 15px;
+        right: -20px;
+        overflow: visible; /* so we can see the pseudo-elements we're going to add to the anchor */
+        font-size: 18px; /* font-size and line-height must be equal so we can account for the height of the banner */
+        line-height: 18px;
+    }
+
+        #ribbon-container:before {
+            content: "";
+            height: 0;
+            width: 0;
+            display: block;
+            position: absolute;
+            top: 3px;
+            left: 0;
+            border-top: 29px solid rgba(0,0,0,.3); /* These 4 border properties create the first part of our drop-shadow */
+            border-bottom: 29px solid rgba(0,0,0,.3);
+            border-right: 29px solid rgba(0,0,0,.3);
+            border-left: 29px solid transparent;
+        }
+
+        #ribbon-container:after { /* This adds the second part of our dropshadow */
+            content: "";
+            height: 3px;
+            background: rgba(0,0,0,.3);
+            display: block;
+            position: absolute;
+            bottom: -3px;
+            left: 58px;
+            right: 3px;
+        }
+
+        #ribbon-container a {
+            display: block;
+            padding: 20px;
+            position: relative; /* allows us to position our pseudo-elements properly */
+            background: #0089d0;
+            overflow: visible;
+            height: 58px;
+            margin-left: 29px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+            #ribbon-container a:after { /* this creates the "folded" part of our ribbon */
+                content: "";
+                height: 0;
+                width: 0;
+                display: block;
+                position: absolute;
+                bottom: -15px;
+                right: 0;
+                border-top: 15px solid #004a70;
+                border-right: 15px solid transparent;
+            }
+
+            #ribbon-container a:before { /* this creates the "forked" part of our ribbon */
+                content: "";
+                height: 0;
+                width: 0;
+                display: block;
+                position: absolute;
+                top: 0;
+                left: -29px;
+                border-top: 29px solid #0089d0;
+                border-bottom: 29px solid #0089d0;
+                border-right: 29px solid transparent;
+                border-left: 29px solid transparent;
+            }
+
+            #ribbon-container a:hover {
+                background: #009ff1;
+            }
+
+                #ribbon-container a:hover:before { /* this makes sure that the "forked" part of the ribbon changes color with the anchor on :hover */
+                    border-top: 29px solid #009ff1;
+                    border-bottom: 29px solid #009ff1;
+                }
+</style>
+
+<div class="container-fluid">
+    <hr /><h3>Item List</h3>
+
+    <div class="col-md-12">
+
+
+        <div class="card-deck">
+
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-5">
+                    <div class="card">
+                        <div id="ribbon-container">
+                            <a id="ribbon">@item.Price.ToString("N2")</a>
+                        </div>
+                        <img src="https://denizbutik.ticimaxcdn.com/Uploads/UrunResimleri/thumb/Cepli-Atlas-Midi-Boy-Elbise---BEYAZ-2b2c.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@(item.ItemName.Length>15?item.ItemName.Substring(0,12)+"...":item.ItemName)</h5>
+                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content</p>
+                            <div class="card-text text-center">
+                                <div class="text-muted">
+                                    <form method="post" asp-route-itemId="@item.Id" asp-route-quantity="1" asp-action="AddCart" asp-controller="SepetIslemleri">
+
+                                        <button type="submit" class="btn btn-lg btn-warning">Add Cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+

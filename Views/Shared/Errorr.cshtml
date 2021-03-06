@@ -1,0 +1,14 @@
+﻿
+
+@{
+    var exception = ViewData["commonFilter"] as Exception;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+<h1>Error Page</h1>
+<div class="alert alert-info">
+    <br />
+    <h3>@exception.Message</h3>
+</div>

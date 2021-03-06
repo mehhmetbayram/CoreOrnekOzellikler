@@ -1,0 +1,12 @@
+{
+  "name": "ApplicationCore",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "v4.4.1",
+    "jQuery": "3.4.1",
+    "jquery-validation-unobtrusive": "v3.2.6",
+    "jquery-ajax-unobtrusive": "v3.2.6",
+    "jquery-validation": "jquery-validate#1.19.1",
+    "select2": "4.0.12"
+  }
+}

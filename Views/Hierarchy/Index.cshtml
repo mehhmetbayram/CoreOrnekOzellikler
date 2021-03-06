@@ -1,0 +1,56 @@
+﻿@model List<ProjeCoreOrnekOzellikler.Entities.Category>
+@addTagHelper*,OrnekCoreOzellikler
+
+
+
+
+
+@section head{
+
+    <link href="~/vakata-jstree-a7f2242/dist/themes/default/style.min.css" rel="stylesheet" />
+
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-1">
+
+            <h3><span class="badge badge-warning">Kategori Listesi</span></h3>
+
+            <category-List></category-List>
+
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/vakata-jstree-a7f2242/src/jstree.js"></script>
+    <script src="~/vakata-jstree-a7f2242/src/jstree.contextmenu.js"></script>
+
+    @*<script src="~/vakata-jstree-a7f2242/dist/jstree.min.js"></script>*@
+
+    <script type="text/javascript">
+        $(function () {
+            $('.tree').jstree({
+                "core": { "check_callback": true },
+                "plugins": ["contextmenu"]
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+        });
+
+    </script>
+
+} 

@@ -1,0 +1,68 @@
+﻿@model ItemModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Categories</h3>
+        </div>
+        <div class="col-md-8">
+
+
+
+
+
+
+            <product-paging current-category="@Model.CurrentCategory"
+                            current-page="@Model.CurrentPage"
+                            page-count="@Model.PageCount"
+                            page-size="@Model.PageSize">
+
+
+            </product-paging>
+
+
+
+
+            <br />
+            <h5>Toplam Sayfa : @Model.PageCount</h5>
+            <h5>Listelenen Urun : @Model.CdItems.Count</h5>
+            <h5>Toplam Urun : @Model.TotalCountProduct</h5>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ProductCode</th>
+                            <th>ProductName</th>
+                            <th>Price</th>
+                            <th>Stok</th>
+                            <th>Desc</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CdItems)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.ItemCode</td>
+                                <td>@item.ItemName</td>
+                                <td>@item.Price.ToString("N2") </td>
+                                <td>@item.Qty</td>
+                                <td>@Html.Raw(@item.Description.Length > 10 ? item.Description.Substring(0, 10) : item.Description)</td>
+
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

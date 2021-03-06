@@ -1,0 +1,77 @@
+﻿@model ProjeCoreOrnekOzellikler.Entities.Cart
+@{
+    ViewData["Title"] = "Basket";
+}
+
+
+<div class="container">
+    @if (Model.CartLines.Count > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>ItemCode</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CartLines)
+                    {
+                        <tr>
+                            <td>
+                                <img width="100" height="100" src="https://denizbutik.ticimaxcdn.com/Uploads/UrunResimleri/thumb/Cepli-Atlas-Midi-Boy-Elbise---BEYAZ-2b2c.jpg" />
+                            </td>
+                            <td>@item.cdItem.ItemName</td>
+                            <td>@item.cdItem.ItemCode</td>
+                            <td>@item.cdItem.Price.ToString("N2")</td>
+                            <td>@item.Quantity</td>
+                            <td>@((item.Quantity*item.cdItem.Price).ToString("N2"))</td>
+                            <td>
+                                <a class="btn btn-warning" asp-controller="SepetIslemleri" asp-action="RemoveCart" asp-route-id="@item.cdItem.Id">Remove Cart</a>
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th class="text-left">
+                            <a class="btn btn-lg btn-info" asp-action="Index" asp-controller="SepetIslemleri">Alisverise Devam Et</a>
+                        </th>
+                        <th class="text-center">
+                            <a class="btn btn-lg btn-danger" asp-action="ClearCart" asp-controller="SepetIslemleri">Sepeti Boşalt</a>
+                        </th>
+                        <th colspan="5" class="text-right">
+                            <h3>
+                                <span class="badge badge-primary">
+                                    Toplam Tutar : @Model.Amount.ToString("N2")
+                                </span>
+                            </h3>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    }
+    else
+    {
+
+
+        <br />
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Dikkat !</strong> Sepette urun bulunamadi..
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+    }
+</div>
+

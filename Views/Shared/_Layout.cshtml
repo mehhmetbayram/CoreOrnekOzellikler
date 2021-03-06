@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/library/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/library/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" crossorigin="anonymous">
+    <link href="~/library/jquery-ui-1.12.1.custom/jquery-ui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+    <style>
+        .alert-message {
+            margin: 20px 0;
+            padding: 20px;
+            border-left: 3px solid #eee;
+        }
+
+            .alert-message h4 {
+                margin-top: 0;
+                margin-bottom: 5px;
+            }
+
+            .alert-message p:last-child {
+                margin-bottom: 0;
+            }
+
+            .alert-message code {
+                background-color: #fff;
+                border-radius: 3px;
+            }
+
+        .alert-message-success {
+            background-color: #F4FDF0;
+            border-color: #3C763D;
+        }
+
+            .alert-message-success h4 {
+                color: #3C763D;
+            }
+
+        .alert-message-danger {
+            background-color: #fdf7f7;
+            border-color: #d9534f;
+        }
+
+            .alert-message-danger h4 {
+                color: #d9534f;
+            }
+
+        .alert-message-warning {
+            background-color: #fcf8f2;
+            border-color: #f0ad4e;
+        }
+
+            .alert-message-warning h4 {
+                color: #f0ad4e;
+            }
+
+        .alert-message-info {
+            background-color: #f4f8fa;
+            border-color: #5bc0de;
+        }
+
+            .alert-message-info h4 {
+                color: #5bc0de;
+            }
+
+        .alert-message-default {
+            background-color: #EEE;
+            border-color: #B4B4B4;
+        }
+
+            .alert-message-default h4 {
+                color: #000;
+            }
+
+        .alert-message-notice {
+            background-color: #FCFCDD;
+            border-color: #BDBD89;
+        }
+
+            .alert-message-notice h4 {
+                color: #444;
+            }
+    </style>
+
+    @RenderSection("head", false)
+
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index","Product")">Add Product <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Kategori
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="@Url.Action("Index","Hierarchy")">Kategori Listesi</a>
+                        <a class="dropdown-item" href="/category" )">Kategori Ekle </a>
+
+                    </div>
+                </li>
+
+
+
+
+                <li class="nav-item">
+                    <a class="nav-link " href="/Excel/Index" tabindex="-1" aria-disabled="true">Excel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/WebPImage/Index" tabindex="-1" aria-disabled="true">WebP Image</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/Sayfalama/Index" tabindex="-1" aria-disabled="true">Sayfalama</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="/SepetIslemleri/Index" tabindex="-1" aria-disabled="true">Sepet Islemleri</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/Security/Index" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
+                        Security
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="@Url.Action("Register","Security")">Register</a>
+
+
+                    </div>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="@Url.Action("ForgotPassword","Security")">ForgotPassword</a>
+
+
+                    </div>
+                    
+                </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container">
+        <br />
+        @RenderBody()
+    </div>
+
+    <script src="~/library/jQuery/dist/jquery.min.js"></script>
+    <script src="~/library/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/library/jquery-ajax-unobtrusive/src/jquery.unobtrusive-ajax.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/library/select2/dist/js/select2.min.js"></script>
+    <script src="~/library/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+
+
+
+    @RenderSection("scripts", false)
+
+
+</body>
+</html>

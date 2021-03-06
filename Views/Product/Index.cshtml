@@ -1,0 +1,157 @@
+﻿@model ProductModel
+@using FormHelper;
+@addTagHelper*,ProjeCoreOrnekOzellikler.TagHelpers
+
+@{
+    var formConfig = new FormConfig(ViewContext)
+    {
+        FormId = "frmProduct"
+    };
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <h3>Add Product</h3>
+
+
+            <form id="frmProduct" asp-antiforgery="true" asp-action="AddProduct" asp-controller="Product" enctype="multipart/form-data">
+
+                <div class="text-danger font-weight-bold" asp-validation-summary="All">
+
+                </div>
+
+
+                <div class="properties">
+
+
+                    <div class="form-group">
+                        <label asp-for="Product.ItemName"></label>
+                        <div class="col-md-8">
+                            <input asp-for="Product.ItemName" class="form-control" />
+                            <span class="text-danger font-weight-bold" asp-validation-for="Product.ItemName"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Product.CategoryId"></label>
+                        <div class="col-md-8">
+
+                            <select class="form-control " asp-for="Product.CategoryId" asp-items="@(new SelectList(Model.CategoryList,"Id","CategoryName"))">
+                            </select>
+
+                            <span class="text-danger font-weight-bold" asp-validation-for="Product.CategoryId"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Product.Qty"></label>
+                        <div class="col-md-8">
+                            <input asp-for="Product.Qty" class="form-control" type="number" />
+                            <span class="text-danger font-weight-bold" asp-validation-for="Product.Qty"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Product.Price"></label>
+                        <div class="col-md-8">
+
+                            <input type="text" class="form-control" id="Product_Price" name="Product.Price" />
+
+                           
+
+                            <span class="text-danger font-weight-bold" asp-validation-for="Product.Price"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Product.Description"></label>
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(m => m.Product.Description, new { @class = "form-control ckEditorTextArea", id = "editor1" })
+                            <span class="text-danger font-weight-bold" asp-validation-for="Product.Description"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Product.CreateDate"></label>
+                        <div class="col-md-8">
+                            <input asp-for="Product.CreateDate" class="form-control" type="date" />
+                            <span class="text-danger font-weight-bold" asp-validation-for="Product.CreateDate"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Product.CreateTime"></label>
+                        <div class="col-md-8">
+                            <input asp-for="Product.CreateTime" class="form-control" type="time" />
+                            <span class="text-danger font-weight-bold" asp-validation-for="Product.CreateTime"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Images</label>
+                        <div class="col-md-8">
+
+                            <input type="file" name="formFiles" multiple>
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Product.IsActive"></label>
+                        <div class="col-md-8">
+                            <label>
+                                <input asp-for="Product.IsActive" type="checkbox" /> Aktif Mi ?
+                            </label>
+                            <span class="text-danger font-weight-bold" asp-validation-for="Product.IsActive"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <br />
+                        <button class="btn btn-outline-info" type="submit">Add Product</button>
+                    </div>
+                </div>
+
+
+
+            </form>
+
+            <br />
+            <div id="productList">
+                @await Component.InvokeAsync("ProductList")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts
+{
+
+    @*@await Html.RenderFormScript(formConfig)*@
+    <script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+    <script>
+      
+
+        function successRemove() {
+            alert("Kayıt Silindi");
+        }
+
+        $(function () {
+            CKEDITOR.replace('editor1');
+
+            $('[data-toggle="tooltip"]').tooltip();
+            $(".select").select2();
+        });
+    </script>
+
+
+}
+

@@ -1,0 +1,53 @@
+﻿@model RegisterViewModel 
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+
+    <div class="container">
+        <h3>Register </h3>
+
+
+        <form asp-action="Register" asp-controller="Security" method="post">
+            <div class="form-group text-danger" asp-validation-summary="All">
+
+            </div>
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col">
+                        <input asp-for="@Model.UserName" class="form-control" placeholder="Username" />
+                        <span asp-validation-for="@Model.UserName" class="text-danger font-weight-bold"></span>
+                    </div>
+                    <div class="col">
+                        <input asp-for="@Model.EMail" class="form-control" placeholder="EMail" />
+                        <span asp-validation-for="@Model.EMail" class="text-danger font-weight-bold"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col">
+                        <input asp-for="@Model.Password" type="password" class="form-control" placeholder="Password" />
+                        <span asp-validation-for="@Model.Password" class="text-danger font-weight-bold"></span>
+                    </div>
+                    <div class="col">
+                        <input asp-for="@Model.ConfirmPassword" type="password" class="form-control" placeholder="Confirm Password" />
+                        <span asp-validation-for="@Model.ConfirmPassword" class="text-danger font-weight-bold"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-info">Register</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+     
+    </div>

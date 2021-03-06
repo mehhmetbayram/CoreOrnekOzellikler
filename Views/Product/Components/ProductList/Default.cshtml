@@ -1,0 +1,89 @@
+﻿@model ProductModel
+@addTagHelper*,ProjeCoreOrnekOzellikler
+
+
+<div class="table-responsive">
+    <br />
+    <table class="table table-hover table-sm">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th width="200">Item Code</th>
+                <th>Item Desc</th>
+
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.ProductList.OrderByDescending(x=>x.Id).Take(50))
+            {
+                <tr>
+                
+                    <td>
+                        @if (Model.prItemPhotos.Count(x => x.cdItemId == product.Id) > 0)
+                        {
+                            <product-image alt-tag="@product.ItemName"
+                                           height="100"
+                                           width="100"
+                                           src="@(Model.prItemPhotos.FirstOrDefault(x => x.cdItemId == product.Id).ImagePath)">
+                            </product-image>
+                        }
+                        else
+                        {
+                            <b>No</b>
+                        }
+                    </td>
+                    <td>@product.ItemCode</td>
+                    <td>@product.ItemName</td>
+
+                    <td>@product.CreateDate.ToShortDateString()</td>
+                    <td>@product.CreateTime.ToString()</td>
+                    <td>@(product.IsActive ? "Aktif" : "Pasif")</td>
+                    <td>@product.Qty</td>
+                    <td>@string.Format("{0:0.00}", product.Price)</td>
+                    <td>@product.Category.CategoryName</td>
+                    <td>
+                   
+
+                        @*<a asp-action="RemoveProduct" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-danger">Remeove Post </a>*@
+
+                        <a class="btn btn-outline-danger"
+                           data-ajax="true" 
+                           data-ajax-update="#productList"
+                           data-ajax-confirm="Kayıt Silinsin mi ?"
+                           data-ajax-success="successRemove"
+                           href="@Url.Action("RemoveProduct","Product",new {id=product.Id})"
+                           >Remove</a>
+
+                       
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-info" asp-controller="Product" asp-action="AddToCart" asp-route-itemId="@product.Id">AddCart</a>
+                    </td>
+                  
+                </tr>
+            }
+        </tbody>
+
+        <tfoot>
+            <tr>
+
+                <td colspan="9">
+                    <br />
+                    <b class="text-right">
+                        Toplam Adet :
+                        @Model.ProductList.Count()
+                    </b>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <br />
+
+</div>

@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "ConfirmEmail";
+}
+
+<h1>ConfirmEmail</h1>
+
+
+@if (TempData["userMessage"] != null && TempData["userMessage"].ToString().Length > 0)
+{
+
+    <div class="col-sm-6 col-md-6">
+        <div class="alert-message alert-message-success">
+            <h4>
+                Basarili
+            </h4>
+            <p>
+                <strong>
+                    @TempData["userMessage"]
+                </strong>
+            </p>
+        </div>
+    </div>
+  
+}

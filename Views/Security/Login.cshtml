@@ -1,0 +1,40 @@
+﻿@model LoginViewModel 
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<div class="container">
+    <h3>Login</h3>
+   
+        <form asp-action="Login" asp-controller="Security" method="post">
+            <div class="form-group text-danger" asp-validation-summary="All">
+
+            </div>
+            <div class="col-md-8">
+                <label>User name</label>
+                <input asp-for="@Model.UserName" class="form-control" />
+                <span asp-validation-for="@Model.UserName" class="text-danger font-weight-bold"></span>
+            </div>
+
+            <div class="col-md-8">
+                <label>Password</label>
+                <input type="password" asp-for="@Model.Password" class="form-control" />
+                <span asp-validation-for="@Model.Password" class="text-danger font-weight-bold"></span>
+            </div>
+
+            <div class="col-md-8">
+                <label>
+                    <input asp-for="@Model.RememberMe" />
+                    Beni Hatirla
+                </label>
+            </div>
+
+            <div class="col-md-8">
+                <button type="submit" class="btn btn-danger">Login</button>
+            </div>
+        </form>
+    </div>
+
+

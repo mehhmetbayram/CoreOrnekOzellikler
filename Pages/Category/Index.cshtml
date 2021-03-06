@@ -1,0 +1,33 @@
+﻿@page
+@model ProjeCoreOrnekOzellikler.Pages.Category.IndexModel
+@addTagHelper*,Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Kategori";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="col-md-12">
+        <br />
+        <h3>Create Category</h3>
+        <form method="post">
+            <div class="form-group">
+                <label>Ust Kategori</label>
+                @Html.DropDownListFor(m => m.category.ParentId, new SelectList(Model.categories, "Id", "CategoryName"), "Seciniz", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label asp-for="category.CategoryName"></label>
+                <input asp-for="category.CategoryName" class="form-control" />
+                <span class="text-danger font-weight-bold" asp-validation-for="category.CategoryName"></span>
+            </div>
+
+            <div class="form-group">
+                <br />
+                <button class="btn btn-outline-info">Add Category</button>
+            </div>
+        </form>
+    </div>
+</div>
+
